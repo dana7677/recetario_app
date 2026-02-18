@@ -77,7 +77,9 @@ class RecetaDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:Center(
+    return Scaffold(
+      appBar: AppBar(title:  Text(receta.titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold))),
+      body:Center(
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -89,7 +91,6 @@ class RecetaDetails extends StatelessWidget {
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
-              Text(receta.titulo,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(

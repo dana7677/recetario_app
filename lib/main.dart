@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:recetario_app/appFolder/lista_recetas.dart';
+import 'package:recetario_app/database/database_helper.dart';
+import 'package:sqflite/sqflite.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized(); // necesario si en initState haces async
+
+void main() async {
+WidgetsFlutterBinding.ensureInitialized(); // necesario para async en main
+
+  final dbHelper = DatabaseHelper.instance;
+
+  // Abrimos la DB
+  final db = await dbHelper.database;
+
+  // Verificamos si ya hay datos en nutricion
+  final count = Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM nutricion')) ?? 0;
+  if (count == 0) {
+    await dbHelper.poblarNutricion(); // se insertan todos los ingredientes
+  }
+
   runApp(const MainApp());
 }
 
@@ -17,7 +32,8 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: const ListaRecetas(), // tu lista se encargará de poblar y cargar DB
+      home: const ListaRecetas(),
     );
   }
 }
+

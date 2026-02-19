@@ -5,6 +5,19 @@ import 'lista_recetas.dart';
 import 'receta_nueva.dart';
 import 'dart:io';
 
+
+class IngredienteItem {
+  String nombre;
+  double cantidad;
+  MedidaPeso medida;
+
+  IngredienteItem({
+    this.nombre = "",
+    this.cantidad = 0.0,
+    this.medida = MedidaPeso.gr,
+  });
+}
+
 class RecetaNueva extends StatefulWidget {
   final VoidCallback onRecetaAgregada;
 
@@ -19,6 +32,10 @@ class _RecetaNuevaState extends State<RecetaNueva> {
   final _descripcionController = TextEditingController();
   final _tiempoController = TextEditingController();
   final _starsController = TextEditingController();
+
+  //Valores Nutri
+  List<IngredienteItem> ingredientesNutri = [IngredienteItem(),];
+  ValoresNutricionales? valoresNutricionalesPasar;
   File? _imagenSeleccionada;
   TipoReceta? tipoReceta;
   Dificultad? tipoDificultad;
@@ -26,6 +43,99 @@ class _RecetaNuevaState extends State<RecetaNueva> {
   List<String> instrucciones=[""];
 
   final ImagePicker _picker = ImagePicker();
+
+  //Nutricion
+
+  String normalizarIngrediente(String nombre) {
+  nombre = nombre.toLowerCase().trim();
+
+  // reglas simples de plural
+  if (nombre.endsWith('s')) {
+    nombre = nombre.substring(0, nombre.length - 1);
+  }
+
+  // reemplazos comunes
+  if (nombre == 'huevos') return 'huevo';
+  if (nombre == 'tomates') return 'tomate';
+  // ...más reglas según necesidad
+
+  return nombre;
+}
+
+
+  double convertirAGramos(IngredienteItem item) {
+  switch (item.medida) {
+    case MedidaPeso.gr:
+      return item.cantidad;
+
+    case MedidaPeso.kg:
+      return item.cantidad * 1000;
+
+    case MedidaPeso.mgr:
+      return item.cantidad / 1000;
+    
+    case MedidaPeso.cuch:
+      return item.cantidad * 12;
+
+    case MedidaPeso.un:
+      return item.cantidad * 50;
+
+    default:
+      return item.cantidad; // fallback
+  }
+}
+
+
+  Future<ValoresNutricionales> calcularNutricionTotal(
+    List<IngredienteItem> ingredientes,BuildContext context) async {
+
+  double totalCarbs = 0;
+  double totalGrasas = 0;
+  double totalAzucares = 0;
+  double totalProteinas = 0;
+  double totalPeso=0;
+
+  for (var ingrediente in ingredientes) {
+
+    if (ingrediente.nombre.isEmpty || ingrediente.cantidad <= 0) continue;
+
+    //Normalizamos, en caso de que el usuario ponga huevos en vez de huevo.
+    String ingredienteNombre = normalizarIngrediente(ingrediente.nombre);
+
+    final data = await DatabaseHelper.instance
+        .buscarIngrediente(ingredienteNombre);
+
+    if (data != null) {
+
+      double gramos = convertirAGramos(ingrediente);
+      totalPeso+=gramos;
+
+      double factor = gramos / 100;
+
+      totalCarbs += (data['carbohidratos'] ?? 0) * factor;
+      totalGrasas += (data['grasas'] ?? 0) * factor;
+      totalAzucares += (data['azucares'] ?? 0) * factor;
+      totalProteinas += (data['proteinas'] ?? 0) * factor;
+
+     
+
+    } else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Ingrediente '${ingrediente.nombre}' no soportado"))
+      );
+    }
+  }
+
+  if (totalPeso == 0) totalPeso = 1; // evitar división por 0
+  double factor2 = 100 / totalPeso;
+
+  return ValoresNutricionales(
+    carbohidratos: double.parse((totalCarbs * factor2).toStringAsFixed(1)),
+    grasas: double.parse((totalGrasas * factor2).toStringAsFixed(1)),
+    azucares: double.parse((totalAzucares * factor2).toStringAsFixed(1)),
+    proteinas: double.parse((totalProteinas * factor2).toStringAsFixed(1)),
+  );
+}
 
   
   //Seleccionar Imagen
@@ -76,11 +186,11 @@ class _RecetaNuevaState extends State<RecetaNueva> {
               ),
               TextField(
                 controller: _tiempoController,
-                decoration: const InputDecoration(labelText: "tiempo"),
+                decoration: const InputDecoration(labelText: "tiempo en minutos"),
               ),
               TextField(
                 controller: _starsController,
-                decoration: const InputDecoration(labelText: "puntuaje"),
+                decoration: const InputDecoration(labelText: "puntuaje ""4"""),
               ),
               Container(
                 alignment: Alignment.topLeft,
@@ -124,47 +234,82 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                 child: Text("Ingredientes:",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,decoration: TextDecoration.underline),textAlign: TextAlign.left)),
               
               Column(
-                  children: [
-                    ...ingredientes.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      String valor = entry.value;
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              onChanged: (texto) {
-                                ingredientes[index] = texto;
-                              },
-                              decoration: InputDecoration(
-                                labelText: "Ingrediente ${index + 1}",
-                              ),
-                              controller: TextEditingController(text: valor),
+                children: [
+                  ...ingredientesNutri.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    IngredienteItem item = entry.value;
+
+                    return Row(
+                      children: [
+                        /// Nombre ingrediente
+                        Expanded(
+                          child: TextField(
+                            onChanged: (texto) {
+                              item.nombre = texto;
+                            },
+                            decoration: InputDecoration(
+                              labelText: "Ingrediente ${index + 1}",
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.remove_circle, color: Colors.red),
-                            onPressed: () {
-                              setState(() {
-                                ingredientes.removeAt(index);
-                              });
+                        ),
+
+                        const SizedBox(width: 8),
+
+                        /// Cantidad
+                        SizedBox(
+                          width: 70,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (texto) {
+                              item.cantidad = double.tryParse(texto) ?? 0;
                             },
-                          )
-                        ],
-                      );
-                    }).toList(),
-         
-                    // Botón para agregar ingrediente
-                    TextButton.icon(
+                            decoration: const InputDecoration(
+                              labelText: "Cant",
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(width: 8),
+
+                        /// Medida
+                        DropdownButton<MedidaPeso>(
+                          value: item.medida,
+                          items: MedidaPeso.values.map((tipo) {
+                            return DropdownMenuItem(
+                              value: tipo,
+                              child: Text(tipo.name),
+                            );
+                          }).toList(),
+                          onChanged: (valor) {
+                            setState(() {
+                              item.medida = valor!;
+                            });
+                          },
+                        ),
+                        
+
+                        /// Eliminar ingrediente
+                        IconButton(
+                          icon: const Icon(Icons.remove_circle, color: Colors.red),
+                          onPressed: () {
+                            setState(() {
+                              ingredientesNutri.removeAt(index);
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                        TextButton.icon(
                       icon: const Icon(Icons.add),
                       label: const Text("Agregar Ingrediente"),
                       onPressed: () {
                         setState(() {
-                          ingredientes.add("");
+                          ingredientesNutri.add(IngredienteItem());
                         });
                       },
-                    ),
-                  ],
-                
+                    )
+                ],
               ),
 
               //Instrucciones
@@ -182,7 +327,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                           Expanded(
                             child: TextField(
                               onChanged: (texto) {
-                                ingredientes[index] = texto;
+                                instrucciones[index] = texto;
                               },
                               decoration: InputDecoration(
                                 labelText: "Instrucciones ${index + 1}",
@@ -233,6 +378,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                       );
                       return; // Salimos sin guardar
                     }
+                    final valoresCalculados = await calcularNutricionTotal(ingredientesNutri,context);
          
                     // 2️⃣ Crear la receta
                     final nuevaReceta = RecetaModel(
@@ -243,14 +389,9 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                           : "assets/images/panCake.jpg", // placeholder
                       stars: 5,
                       tiempo: 30,
-                      valoresNutricional: ValoresNutricionales(
-                        carbohidratos: 20,
-                        grasas: 5,
-                        azucares: 5,
-                        proteinas: 5,
-                      ),
+                      valoresNutricional: valoresCalculados,
                       instrucciones: instrucciones,
-                      ingredientes: ingredientes,
+                      ingredientes: ingredientesNutri.map((e) => e.nombre).where((e) => e.isNotEmpty).toList(),
                       dificultad: tipoDificultad!, // seguro porque ya validamos
                       tipoReceta: tipoReceta!,     // seguro porque ya validamos
                     );

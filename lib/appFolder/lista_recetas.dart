@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:recetario_app/appFolder/receta_details.dart';
 import 'package:recetario_app/appFolder/receta_nueva.dart';
 import 'package:recetario_app/database/database_helper.dart';
 
 /// ENUMS BIEN TIPADOS
+enum MedidaPeso { mgr, gr, kg, un , cuch }
 enum Dificultad { dificil, avanzado, medio, facil }
 enum TipoReceta { desayuno, almuerzo, comida, bebida, postres, todas }
 
@@ -139,12 +142,17 @@ class RecetaItem extends StatelessWidget {
               child: Stack(
                 children: [
                   Container(
-                    child: Image.asset(
-                      receta.urlImage,
-                      height: 180,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                    height: 180,
+                    width: double.infinity,
+                    child: receta.urlImage.startsWith('/')
+                        ? Image.file(
+                            File(receta.urlImage),
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            receta.urlImage,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   Positioned(
                     top: 5,
@@ -276,7 +284,10 @@ class _ListaRecetasState extends State<ListaRecetas> {
     final dbHelper = DatabaseHelper.instance;
 
     // 1️⃣ Borrar todas las recetas
-    await dbHelper.deleteAllRecetas();
+    //await dbHelper.deleteAllRecetas();
+
+      final recetasExistentes = await dbHelper.getRecetas();
+      if (recetasExistentes.isNotEmpty) return;
 
     // 2️⃣ Lista de recetas iniciales
     List<RecetaModel> recetasIniciales = [

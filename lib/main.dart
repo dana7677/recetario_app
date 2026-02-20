@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:recetario_app/appFolder/lista_recetas.dart';
 import 'package:recetario_app/database/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 
 void main() async {
 WidgetsFlutterBinding.ensureInitialized(); // necesario para async en main
 
+  // 🔥 BORRAR DB ANTIGUA (solo depuración)
+  final path = join(await getDatabasesPath(), 'recetas.db');
+  await deleteDatabase(path);
+  
   final dbHelper = DatabaseHelper.instance;
 
   // Abrimos la DB
@@ -17,8 +22,8 @@ WidgetsFlutterBinding.ensureInitialized(); // necesario para async en main
   if (count == 0) {
     await dbHelper.poblarNutricion(); // se insertan todos los ingredientes
   }
-
   runApp(const MainApp());
+
 }
 
 class MainApp extends StatelessWidget {

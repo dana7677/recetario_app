@@ -186,11 +186,11 @@ class _RecetaNuevaState extends State<RecetaNueva> {
               ),
               TextField(
                 controller: _tiempoController,
-                decoration: const InputDecoration(labelText: "tiempo en minutos"),
+                decoration: const InputDecoration(labelText: "tiempo en minutos ⏱"),
               ),
               TextField(
                 controller: _starsController,
-                decoration: const InputDecoration(labelText: "puntuaje ""4"""),
+                decoration: const InputDecoration(labelText: "Calificación sobre 5 ⭐"),
               ),
               Container(
                 alignment: Alignment.topLeft,
@@ -391,7 +391,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                       tiempo: 30,
                       valoresNutricional: valoresCalculados,
                       instrucciones: instrucciones,
-                      ingredientes: ingredientesNutri.map((e) => e.nombre).where((e) => e.isNotEmpty).toList(),
+                      ingredientes: ingredientesNutri.map((e) => e.nombre+" "+e.cantidad.toString()+" "+e.medida.toString().split('.').last+".").where((e) => e.isNotEmpty).toList(),
                       dificultad: tipoDificultad!, // seguro porque ya validamos
                       tipoReceta: tipoReceta!,     // seguro porque ya validamos
                     );

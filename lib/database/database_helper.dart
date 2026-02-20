@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
+  
   static final DatabaseHelper instance = DatabaseHelper._init();
   static Database? _database;
 
@@ -58,11 +59,6 @@ class DatabaseHelper {
   ''');
 
   }
-
- 
-
-  
-
   /// Inserta una receta (mapa de valores)
   Future<int> insertReceta(Map<String, dynamic> row) async {
     final db = await instance.database;

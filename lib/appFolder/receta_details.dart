@@ -88,7 +88,7 @@ class GraficaNutricional extends StatelessWidget {
       key: graficaKey,
       child: Container(
         padding: EdgeInsets.all(16),
-        height: 220,
+        height: 200,
         child: PieChart(
           PieChartData(
             sections: [
@@ -97,28 +97,28 @@ class GraficaNutricional extends StatelessWidget {
                 color: Colors.green,
                 title: 'Proteínas\n${proteinas}g',
                 radius: 50,
-                titleStyle: TextStyle(fontSize: 12, color: Colors.white),
+                titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: carbohidratos,
                 color: Colors.orange,
                 title: 'Carbos\n${carbohidratos}g',
                 radius: 50,
-                titleStyle: TextStyle(fontSize: 12, color: Colors.white),
+                titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: grasas,
                 color: Colors.red,
                 title: 'Grasas\n${grasas}g',
                 radius: 50,
-                titleStyle: TextStyle(fontSize: 12, color: Colors.white),
+                titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: azucares,
                 color: Colors.purple,
                 title: 'Azúcares\n${azucares}g',
                 radius: 50,
-                titleStyle: TextStyle(fontSize: 12, color: Colors.white),
+                titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
             ],
           ),
@@ -201,9 +201,11 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(receta.titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),actions: [
+      appBar: AppBar(title:  Container(alignment: Alignment.center, child: Text("¿ Que cocinamos hoy ?",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,))),backgroundColor:const Color.fromARGB(255, 253, 249, 239)
+        ,actions: [
         IconButton(onPressed:() => compartirRecetaConImagen(receta), icon: Icon(Icons.share))
       ],),
+      backgroundColor:Color.fromARGB(255, 253, 249, 239),
       body:Center(
       child: SingleChildScrollView(
         child: Padding(

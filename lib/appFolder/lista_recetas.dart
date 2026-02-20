@@ -126,11 +126,18 @@ class RecetaItem extends StatelessWidget {
     return GestureDetector(
       onTap: showDetails,
       child: Card(
+        clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.all(10),
         elevation: 5,
-        color: const Color.fromARGB(255, 243, 249, 254),
+        color: const Color.fromARGB(255,255,255,252),
+        
+        shadowColor: 
+          const Color.fromARGB(180, 0, 0, 0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: const Color.fromARGB(78, 0, 0, 0)
+          )
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -661,7 +668,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
 
   void filterRecipesBy(TipoReceta tipoFiltrar) {
     setState(() {
-      if (tipoFiltrar != filtroActivo) {
+      if (tipoFiltrar != filtroActivo || tipoFiltrar != TipoReceta.todas) {
         listaRecetas =
             listaRecetaOriginal.where((r) => r.tipoReceta == tipoFiltrar).toList();
         filtroActivo = tipoFiltrar;
@@ -678,7 +685,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
       appBar: AppBar(
         title: const Text("Lista Recetas"),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 255, 245, 220),
+        backgroundColor:  const Color.fromARGB(255,244,241,222),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Row(
@@ -736,7 +743,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
           ),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 255, 245, 220),
+      backgroundColor: const Color.fromARGB(255,244,241,222),
       body: listaRecetas.isEmpty
           ? const Center(
               child: Text(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recetario_app/database/database_helper.dart';
 import 'lista_recetas.dart';
-import 'receta_nueva.dart';
 import 'dart:io';
 
 
@@ -299,7 +298,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                         ),
                       ],
                     );
-                  }).toList(),
+                  }),
                         TextButton.icon(
                       icon: const Icon(Icons.add),
                       label: const Text("Agregar Ingrediente"),
@@ -339,13 +338,13 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                             icon: const Icon(Icons.remove_circle, color: Colors.red),
                             onPressed: () {
                               setState(() {
-                                ingredientes.removeAt(index);
+                                instrucciones.removeAt(index);
                               });
                             },
                           )
                         ],
                       );
-                    }).toList(),
+                    }),
          
                     // Botón para agregar ingrediente
                     TextButton.icon(
@@ -391,7 +390,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                       tiempo: 30,
                       valoresNutricional: valoresCalculados,
                       instrucciones: instrucciones,
-                      ingredientes: ingredientesNutri.map((e) => e.nombre+" "+e.cantidad.toString()+" "+e.medida.toString().split('.').last+".").where((e) => e.isNotEmpty).toList(),
+                      ingredientes: ingredientesNutri.map((e) => "${e.nombre} ${e.cantidad} ${e.medida.toString().split('.').last}.").where((e) => e.isNotEmpty).toList(),
                       dificultad: tipoDificultad!, // seguro porque ya validamos
                       tipoReceta: tipoReceta!,     // seguro porque ya validamos
                     );

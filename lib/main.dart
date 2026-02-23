@@ -9,8 +9,8 @@ void main() async {
 WidgetsFlutterBinding.ensureInitialized(); // necesario para async en main
 
   // 🔥 BORRAR DB ANTIGUA (solo depuración)
-  final path = join(await getDatabasesPath(), 'recetas.db');
-  await deleteDatabase(path);
+  //final path = join(await getDatabasesPath(), 'recetas.db');
+  //await deleteDatabase(path);
   
   final dbHelper = DatabaseHelper.instance;
 

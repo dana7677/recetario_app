@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:recetario_app/appFolder/receta_details.dart';
 import 'package:recetario_app/appFolder/receta_nueva.dart';
 import 'package:recetario_app/database/database_helper.dart';
+import 'package:vibration/vibration.dart';
+import 'package:flutter/services.dart';
 
 /// ENUMS BIEN TIPADOS
 enum MedidaPeso { mgr, gr, kg, un , cuch }
@@ -148,7 +150,7 @@ class RecetaItem extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: 180,
                     width: double.infinity,
                     child: receta.urlImage.startsWith('/')
@@ -660,6 +662,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
   }
 
   void showDetails(RecetaModel receta) {
+    (duration: 30);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RecetaDetails(receta: receta)),
@@ -668,9 +671,10 @@ class _ListaRecetasState extends State<ListaRecetas> {
 
   void filterRecipesBy(TipoReceta tipoFiltrar) {
     setState(() {
-      if (tipoFiltrar != filtroActivo || tipoFiltrar != TipoReceta.todas) {
-        listaRecetas =
-            listaRecetaOriginal.where((r) => r.tipoReceta == tipoFiltrar).toList();
+      
+      if (tipoFiltrar != filtroActivo) {
+        HapticFeedback.mediumImpact();
+        listaRecetas = listaRecetaOriginal.where((r) => r.tipoReceta == tipoFiltrar || r.tipoReceta==TipoReceta.todas).toList();
         filtroActivo = tipoFiltrar;
       } else {
         listaRecetas = listaRecetaOriginal;

@@ -1,36 +1,69 @@
 
 import 'package:recetario_app/appFolder/lista_recetas.dart';
 import 'dart:io';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/rendering.dart';
 
 
-class IngredienteItem extends StatelessWidget{
+class IngredienteItem extends StatefulWidget {
   final String ingrediente;
-  final  int position;
+  final int position;
 
   const IngredienteItem({
     super.key,
     required this.ingrediente,
-    required this.position
+    required this.position,
   });
 
   @override
+  State<IngredienteItem> createState() => _IngredienteItemState();
+}
+
+class _IngredienteItemState extends State<IngredienteItem> {
+  bool loTengo = false;
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          HapticFeedback.lightImpact();
+          loTengo = !loTengo;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: loTengo ? Colors.green.shade100 : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: loTengo ? Colors.green : Colors.grey.shade300,
+            width: 1.5,
+          ),
+        ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(" - ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-            Text(ingrediente,style: TextStyle(fontSize: 20))
+            Icon(
+              loTengo ? Icons.check_circle : Icons.radio_button_unchecked,
+              color: loTengo ? Colors.green : Colors.grey,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                widget.ingrediente,
+                style: TextStyle(
+                  fontSize: 18,
+                  decoration:
+                      loTengo ? TextDecoration.lineThrough : TextDecoration.none,
+                  color: loTengo ? Colors.green.shade800 : Colors.black87,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -51,6 +84,22 @@ class InstruccionItem extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Row(
+      children: [
+        CircleAvatar(
+          backgroundColor: Colors.orange,
+          child: Text("$position",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
+        ),
+        SizedBox(width: 12),
+        Expanded(child: Text(instruccion,style: TextStyle(fontSize: 20))),
+      ],
+    ),
+  );
+
+    /*
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
@@ -63,6 +112,7 @@ class InstruccionItem extends StatelessWidget{
         ),
       ),
     );
+    */
   }
 }
 class GraficaNutricional extends StatelessWidget {
@@ -95,28 +145,28 @@ class GraficaNutricional extends StatelessWidget {
               PieChartSectionData(
                 value: proteinas,
                 color: Colors.green,
-                title: 'Proteínas\n${proteinas}g',
+                title: "",//'Proteínas\n${proteinas}g',
                 radius: 50,
                 titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: carbohidratos,
                 color: Colors.orange,
-                title: 'Carbos\n${carbohidratos}g',
+                title: "",//'Carbos\n${carbohidratos}g',
                 radius: 50,
                 titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: grasas,
                 color: Colors.red,
-                title: 'Grasas\n${grasas}g',
+                title: "",//'Grasas\n${grasas}g',
                 radius: 50,
                 titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
               PieChartSectionData(
                 value: azucares,
                 color: Colors.purple,
-                title: 'Azúcares\n${azucares}g',
+                title: "",//'Azúcares\n${azucares}g',
                 radius: 50,
                 titleStyle: TextStyle(fontSize: 11, color: Colors.white),
               ),
@@ -212,10 +262,11 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                child: receta.urlImage.startsWith('/')
+              Stack(
+                children: [
+                  ClipRRect(
+                  borderRadius: BorderRadiusGeometry.circular(20),
+                  child: receta.urlImage.startsWith('/')
                     ? Image.file(
                         File(receta.urlImage),
                         fit: BoxFit.cover,
@@ -225,22 +276,23 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
                         fit: BoxFit.cover,
                       ),
               ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [Colors.transparent,Colors.black87],
+                      begin: Alignment.topCenter,
+                      end:Alignment.bottomCenter)
+                    ),
+                  ))
+              ],
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
+                child: SizedBox(
                   height: 60,
                   child: Text(receta.description,style: TextStyle(fontSize: 18),)),
               ),
-              SizedBox(
-                height: 220,
-                child: GraficaNutricional(
-                proteinas: receta.valoresNutricional.proteinas,
-                carbohidratos: receta.valoresNutricional.carbohidratos,
-                grasas: receta.valoresNutricional.grasas,
-                azucares: receta.valoresNutricional.azucares,
-                graficaKey: _graficaKey,
-              ),
-              ), 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -249,7 +301,7 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
                       Container(
 
                         alignment: Alignment.topLeft,
-                        child: Text("Ingredientes:",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,decoration: TextDecoration.underline),textAlign: TextAlign.left)
+                        child: Text("Ingredientes:",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left)
                       ),
                       
                       Column(
@@ -276,7 +328,7 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
                       Container(
 
                         alignment: Alignment.topLeft,
-                        child: Text("Instrucciones:",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,decoration: TextDecoration.underline),textAlign: TextAlign.left)
+                        child: Text("Instrucciones:",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left)
                       ),
                       
                       Column(
@@ -294,8 +346,53 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
                   ),
                 ),
               )
-            
-
+              ,
+              Card(
+                elevation: 6,
+                shape:RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(20)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: 335,
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Información nutricional",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),textAlign: TextAlign.left)),
+                        GraficaNutricional(
+                        proteinas: receta.valoresNutricional.proteinas,
+                        carbohidratos: receta.valoresNutricional.carbohidratos,
+                        grasas: receta.valoresNutricional.grasas,
+                        azucares: receta.valoresNutricional.azucares,
+                        graficaKey: _graficaKey,
+                        ),
+                        Container(
+                          width: 140,
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text("🔴 Grasas 18g",style: TextStyle(fontSize: 17))),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text("🟢 Proteínas 15g",style: TextStyle(fontSize: 17))),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text("🟠 Carbos 10g",style: TextStyle(fontSize: 17))),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text("🟣 Azúcares 2g",style: TextStyle(fontSize: 17))),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ), 
             ],
           ),
         ),

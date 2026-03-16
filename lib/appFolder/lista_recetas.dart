@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:recetario_app/appFolder/receta_details.dart';
 import 'package:recetario_app/appFolder/receta_nueva.dart';
 import 'package:recetario_app/database/database_helper.dart';
-import 'package:vibration/vibration.dart';
 import 'package:flutter/services.dart';
 
 /// ENUMS BIEN TIPADOS
@@ -288,7 +287,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
     poblarBaseDeDatos().then((_) => cargarRecetasDesdeDB());
   }
 
-  // BORRA TODO Y POBLA LA DB CON RECETAS
+  // Borra all y pobla la db con recetas
   Future<void> poblarBaseDeDatos() async {
     final dbHelper = DatabaseHelper.instance;
 

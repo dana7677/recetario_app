@@ -184,10 +184,10 @@ class RecetaDetails extends StatelessWidget {
 
  final RecetaModel receta;
 
-  final double proteinas = 25;
-  final double carbohidratos = 50;
-  final double grasas = 10;
-  final double azucares = 15;
+  double get proteinas => receta.valoresNutricional.proteinas;
+  double get carbohidratos => receta.valoresNutricional.carbohidratos;
+  double get grasas => receta.valoresNutricional.grasas;
+  double get azucares => receta.valoresNutricional.azucares;
   List<String> get instrucciones => receta.instrucciones;
   List<String> get ingredientes => receta.ingredientes;
   final GlobalKey _graficaKey = GlobalKey();
@@ -375,16 +375,16 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text("🔴 Grasas 18g",style: TextStyle(fontSize: 17))),
+                                child: Text("🔴 Grasas ${receta.valoresNutricional.grasas}",style: TextStyle(fontSize: 17))),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text("🟢 Proteínas 15g",style: TextStyle(fontSize: 17))),
+                                child: Text("🟢 Proteínas ${receta.valoresNutricional.proteinas}",style: TextStyle(fontSize: 17))),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text("🟠 Carbos 10g",style: TextStyle(fontSize: 17))),
+                                child: Text("🟠 Carbos ${receta.valoresNutricional.carbohidratos}",style: TextStyle(fontSize: 17))),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text("🟣 Azúcares 2g",style: TextStyle(fontSize: 17))),
+                                child: Text("🟣 Azúcares ${receta.valoresNutricional.azucares}",style: TextStyle(fontSize: 17))),
                             ],
                           ),
                         )

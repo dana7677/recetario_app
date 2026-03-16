@@ -4,6 +4,7 @@ import 'package:recetario_app/database/database_helper.dart';
 import 'lista_recetas.dart';
 import 'dart:io';
 
+//Clase Ingrediente
 
 class IngredienteItem {
   String nombre;
@@ -16,6 +17,8 @@ class IngredienteItem {
     this.medida = MedidaPeso.gr,
   });
 }
+
+//Receta Nueva
 
 class RecetaNueva extends StatefulWidget {
   final VoidCallback onRecetaAgregada;
@@ -84,7 +87,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
   }
 }
 
-
+  //Función asincrona para calcular el valor nutricional en función de los ingredientes insertados y sus unidades.
   Future<ValoresNutricionales> calcularNutricionTotal(
     List<IngredienteItem> ingredientes,BuildContext context) async {
 
@@ -136,17 +139,49 @@ class _RecetaNuevaState extends State<RecetaNueva> {
   );
 }
 
+
+
   
   //Seleccionar Imagen
+Future<void> _seleccionarImagen(ImageSource source) async {
+  final XFile? imagen = await _picker.pickImage(source: source);
 
-  Future<void> seleccionarImagen() async {
-    final XFile? imagen = await _picker.pickImage(source: ImageSource.gallery);
-    if (imagen != null) {
-      setState(() {
-        _imagenSeleccionada = File(imagen.path);
-      });
-    }
+  if (imagen != null) {
+    setState(() {
+      _imagenSeleccionada = File(imagen.path);
+    });
   }
+}
+
+void _mostrarSelectorImagen() {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text("Elegir de la galería"),
+              onTap: () {
+                Navigator.pop(context);
+                _seleccionarImagen(ImageSource.gallery);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text("Hacer una foto"),
+              onTap: () {
+                Navigator.pop(context);
+                _seleccionarImagen(ImageSource.camera);
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
 
   double porcentaje = 0;
 
@@ -165,7 +200,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
                 decoration: const InputDecoration(labelText: "Título"),
               ),
               GestureDetector(
-                            onTap: seleccionarImagen,
+                            onTap: _mostrarSelectorImagen,
                             child: Container(
                               height: 200,
                               width: double.infinity,

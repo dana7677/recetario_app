@@ -65,6 +65,17 @@ class DatabaseHelper {
     return await db.insert('recetas', row);
   }
 
+  /// Borrar una receta por titulo
+  Future<int> deleteReceta(int id) async {
+    final db = await database;
+
+    return await db.delete(
+      'recetas',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   /// Obtiene todas las recetas
   Future<List<Map<String, dynamic>>> getRecetas() async {
     final db = await instance.database;

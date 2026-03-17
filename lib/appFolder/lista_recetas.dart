@@ -167,8 +167,21 @@ class RecetaItem extends StatelessWidget {
                     right: 10,
                     child: IconButton(
                       icon: const Icon(
+                        Icons.delete,
+                        color: Color.fromARGB(255, 255, 42, 42),
+                        size: 30,
+                        weight: 1,
+                      ),
+                      onPressed: onEliminar,
+                    ),
+                  ),
+                  Positioned(
+                    top: 5,
+                    left: 10,
+                    child: IconButton(
+                      icon: const Icon(
                         Icons.dehaze,
-                        color: Colors.white,
+                        color: Color.fromRGBO(255, 255, 255, 1),
                         size: 30,
                         weight: 1,
                       ),
@@ -657,6 +670,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
   void eliminarReceta(int index) {
     setState(() {
       listaRecetas.removeAt(index);
+      DatabaseHelper.instance.deleteReceta(index);
     });
   }
 

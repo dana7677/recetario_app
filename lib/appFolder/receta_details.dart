@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 
+//Widget de ingrediente
 class IngredienteItem extends StatefulWidget {
   final String ingrediente;
   final int position;
@@ -71,6 +72,7 @@ class _IngredienteItemState extends State<IngredienteItem> {
   }
 }
 
+// Widget de Instrucción
 class InstruccionItem extends StatelessWidget{
   final String instruccion;
   final  int position;
@@ -98,23 +100,10 @@ class InstruccionItem extends StatelessWidget{
       ],
     ),
   );
-
-    /*
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("$position- ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),),
-            Text(instruccion,style: TextStyle(fontSize: 20))
-          ],
-        ),
-      ),
-    );
-    */
   }
 }
+
+// Widget de la gráfica nutricional
 class GraficaNutricional extends StatelessWidget {
   final double proteinas;
   final double carbohidratos;
@@ -178,8 +167,7 @@ class GraficaNutricional extends StatelessWidget {
   }
 }
 
-
-
+//Widget de la receta
 class RecetaDetails extends StatelessWidget {
 
  final RecetaModel receta;
@@ -223,6 +211,7 @@ ${receta.instrucciones.asMap().entries.map((e) => "${e.key + 1}️⃣ ${e.value}
 ⭐ Calificación: ${receta.stars}
 ''';
 /*
+  // No lo uso pero dejo comentado , por si se usa en un futuro, convertimos la grafica a imagen para poder compartirla.
   // 2️⃣ Capturar gráfica como imagen
   final boundary = _graficaKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
   final ui.Image image = await boundary.toImage(pixelRatio: 3.0);

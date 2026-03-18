@@ -623,7 +623,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
           tipoReceta: TipoReceta.desayuno,
         ),
 
-      // ... aquí puedes añadir todas tus demás recetas manualmente siguiendo el mismo formato
+      // ... aquí se pueden añadir mas recetas...
     ];
 
     // 3️⃣ Insertar en la DB
@@ -667,13 +667,23 @@ class _ListaRecetasState extends State<ListaRecetas> {
     print("Recetas cargadas desde la base de datos: ${listaRecetas.length}");
   }
 
-  void eliminarReceta(int index) {
+  // Eliminamos la receta por indice
+  void eliminarReceta(int id,int index) {
+
+    final receta = listaRecetas[index];
+
     setState(() {
       listaRecetas.removeAt(index);
-      DatabaseHelper.instance.deleteReceta(index);
+      listaRecetaOriginal.removeAt(index);
+    if(id!=null)
+    {
+       DatabaseHelper.instance.deleteReceta(id);
+    }
+
     });
   }
 
+  // Mostrar detalles, vamos al RecetaDetails con la receta seleccionada
   void showDetails(RecetaModel receta) {
     (duration: 30);
     Navigator.push(
@@ -682,6 +692,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
     );
   }
 
+  // Filtrar por tipo de receta
   void filterRecipesBy(TipoReceta tipoFiltrar) {
     setState(() {
       
@@ -774,7 +785,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
                 final receta = listaRecetas[index];
                 return RecetaItem(
                   receta: receta,
-                  onEliminar: () => eliminarReceta(index),
+                  onEliminar: () => eliminarReceta(receta.id!,index),
                   showDetails: () => showDetails(receta),
                 );
               },

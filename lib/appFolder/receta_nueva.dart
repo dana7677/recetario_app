@@ -59,7 +59,7 @@ class _RecetaNuevaState extends State<RecetaNueva> {
   // reemplazos comunes
   if (nombre == 'huevos') return 'huevo';
   if (nombre == 'tomates') return 'tomate';
-  // ...más reglas según necesidad
+  //....
 
   return nombre;
 }
@@ -320,8 +320,6 @@ void _mostrarSelectorImagen() {
                             });
                           },
                         ),
-                        
-
                         /// Eliminar ingrediente
                         IconButton(
                           icon: const Icon(Icons.remove_circle, color: Colors.red),
@@ -380,7 +378,6 @@ void _mostrarSelectorImagen() {
                         ],
                       );
                     }),
-         
                     // Botón para agregar ingrediente
                     TextButton.icon(
                       icon: const Icon(Icons.add),

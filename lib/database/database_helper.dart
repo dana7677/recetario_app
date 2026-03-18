@@ -26,6 +26,9 @@ class DatabaseHelper {
     );
   }
 
+  /// CRUD:
+
+  // Crear la DB
   Future _createDB(Database db, int version) async {
     await db.execute('''
     CREATE TABLE recetas(
@@ -58,16 +61,20 @@ class DatabaseHelper {
     )
   ''');
 
+  await db.execute('''
+  CREATE INDEX idx_nombre ON nutricion(nombre);
+  ''');
+  
   }
-  /// Inserta una receta (mapa de valores)
+  // Inserta una receta (mapa de valores)
   Future<int> insertReceta(Map<String, dynamic> row) async {
     final db = await instance.database;
     return await db.insert('recetas', row);
   }
 
-  /// Borrar una receta por titulo
+  // Borrar una receta por titulo
   Future<int> deleteReceta(int id) async {
-    final db = await database;
+    final db = await instance.database;
 
     return await db.delete(
       'recetas',
@@ -75,25 +82,51 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+  //Borrar una receta por búsquedas, NO EN USO
+  Future<int> deleteRecetaByTitulo(String titulo) async {
+    final db = await instance.database;
 
-  /// Obtiene todas las recetas
+    return await db.delete(
+      'recetas',
+      where: 'titulo = ?',
+      whereArgs: [titulo],
+    );
+  }
+  //Actualizar
+  Future<int> updateReceta(Map<String, dynamic> row) async {
+    final db = await instance.database;
+
+    int id = row['id'];
+
+    return await db.update(
+      'recetas',
+      row,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+
+  // Obtiene todas las recetas
   Future<List<Map<String, dynamic>>> getRecetas() async {
     final db = await instance.database;
     return await db.query('recetas', orderBy: 'id');
   }
 
-  /// Cierra la base de datos
+  // Cierra la base de datos
   Future close() async {
     final db = await instance.database;
     db.close();
   }
+
+  // BorraTodas las Recetas
   Future<int> deleteAllRecetas() async {
-  final db = await database;
-  return await db.delete('recetas');
-}
+    final db = await database;
+    return await db.delete('recetas');
+  }
 
 
-//Nutricion
+  //Nutricion
 
   Future<Map<String, dynamic>?> buscarIngrediente(String nombre) async {
     final db = await instance.database;
@@ -111,7 +144,8 @@ class DatabaseHelper {
     return null;
   }
 
-    Future<void> poblarNutricion() async {
+  // Poblar DB Nutrición
+  Future<void> poblarNutricion() async {
     final db = await instance.database;
 
     final ingredientesBase = [

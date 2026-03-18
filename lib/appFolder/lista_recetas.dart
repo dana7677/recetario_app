@@ -668,16 +668,15 @@ class _ListaRecetasState extends State<ListaRecetas> {
   }
 
   // Eliminamos la receta por indice
-  void eliminarReceta(int id,int index) {
+  void eliminarReceta(int index) {
 
     final receta = listaRecetas[index];
 
     setState(() {
       listaRecetas.removeAt(index);
-      listaRecetaOriginal.removeAt(index);
-    if(id!=null)
+    if(receta.id!=null)
     {
-       DatabaseHelper.instance.deleteReceta(id);
+       DatabaseHelper.instance.deleteReceta(receta.id!);
     }
 
     });
@@ -785,7 +784,7 @@ class _ListaRecetasState extends State<ListaRecetas> {
                 final receta = listaRecetas[index];
                 return RecetaItem(
                   receta: receta,
-                  onEliminar: () => eliminarReceta(receta.id!,index),
+                  onEliminar: () => eliminarReceta(index),
                   showDetails: () => showDetails(receta),
                 );
               },

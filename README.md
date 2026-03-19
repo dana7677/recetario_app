@@ -1,16 +1,21 @@
-# recetario_app
+# Recetario App
 
-A new Flutter project.
+Una app de recetas desarrollada en Flutter, con almacenamiento local usando
+SQFlite. Permite ver recetas, añadir nuevas, borrar, compartirlas y consultar
+valores nutricionales de los ingredientes.
 
-## Getting Started
+## Características
+- Lista de recetas con imagen,tiempo, dificultad y valoración.
+- Añadir, editar y eliminar recetas (CRUD).
+- Consulta nutricional de los ingredientes de cada receta.
+- Ordenadas por ID o título.
+- Datos persistentes usando SQLite.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Tecnologías
+- Flutter
+- Dart
+- SQFlite
+- Path

@@ -14,10 +14,6 @@ valores nutricionales de los ingredientes.
 
 ## Screenshots
 
-## Gifs
-
-![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
-
 ## Tecnologías
 - Flutter
 - Dart
@@ -56,5 +52,13 @@ Proyecto libre para uso educativo y portfolio personal.
 ## Mas información
 
 https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=sharing
+
+## Gifs
+
+![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
+![ListaRecetas_1](assets/gifs/GifDetallesReceta.gif)
+![ListaRecetas_1](assets/gifs/GifNuevaRecta.gif)
+![ListaRecetas_1](assets/gifs/GifNuevaRecta2.gif)
+
 
 

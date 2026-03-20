@@ -56,13 +56,19 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ## Gifs
 
 - Ventana Principal Lista de Recetas.
+  
 ![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
 
 - Ventana secundaria Detalles de la receta seleccionada.
+  
 ![DetallesRecetas](assets/gifs/GifDetallesReceta.gif)
 
-- Ventana secundaria Nueva Receta con información nueva.
+- Ventana secundaria Nueva Receta con información insertada po el usuario.
+  
 ![NuevaReceta](assets/gifs/GifNuevaReceta.gif)
+
+- Ventana de detalles mostrando nuestra receta y sus detalles.
+  
 ![NuevaReceta_2](assets/gifs/GifNuevaReceta2.gif)
 
 

@@ -54,14 +54,17 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 
 ### Listado de recetas
 
-
-![Pantalla principal](assets/screenShots/Listado_Recetas.png)
-![Pantalla principal_2](assets/screenShots/Listado_Recetas_2.png)
+<p align="center">
+   <img src="assets/screenShots/Listado_Recetas.png" width="250"/>
+   <img src="assets/screenShots/Listado_Recetas_2.png" width="250"/>
+</p>
 
 ### Detalles
-![Detalles_2](assets/screenShots/Detalles_1.png)
-![Detalles](assets/screenShots/Detalles.png)
-![Detalles_2](assets/screenShots/Detalles_2.png) 
+<p align="center">
+   <img src="assets/screenShots/Detalles_1.png" width="250"/>
+   <img src="assets/screenShots/Detalles.png" width="250"/>
+   <img src="assets/screenShots/Detalles_2.png" width="250"/>
+</p>
 
 ## Screenshots 2
 
@@ -73,7 +76,9 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 
 ### Compartir receta
 
-![CompartirReceta](assets/screenShots/Compartida.jpg)
+<p align="center">
+  <img src="assets/screenShots/Compartida.jpg" width="250"/>
+</p>
 
 
 ## Gifs

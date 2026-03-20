@@ -48,3 +48,9 @@ valores nutricionales de los ingredientes.
 
 ## Licencia 
 Proyecto libre para uso educativo y portfolio personal.
+
+## Mas información
+
+https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=sharing
+
+

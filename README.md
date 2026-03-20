@@ -59,6 +59,7 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ![Detalles_2](assets/screenShots/Detalles_1.png)
 ![Detalles](assets/screenShots/Detalles.png) ![Detalles_2](assets/screenShots/Detalles_2.png) 
 
+## Screenshots 2
 
 ### Nueva Receta
 ![Nueva_Receta](assets/screenShots/NuevaRecetaEditando.jpg) ![Nueva_Receta_1](assets/screenShots/NuevaRecetaEditando_2.jpg)

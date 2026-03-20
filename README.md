@@ -14,6 +14,10 @@ valores nutricionales de los ingredientes.
 
 ## Screenshots
 
+## Gifs
+
+![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
+
 ## Tecnologías
 - Flutter
 - Dart

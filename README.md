@@ -22,17 +22,17 @@ valores nutricionales de los ingredientes.
 
 ## Instalación
 1. Clona el repositorio
-   </> Bash
-   git clone https://github.com/dana7677/recetario_app.git
-   cd recetario_app
+   - </> Bash
+   - git clone https://github.com/dana7677/recetario_app.git
+   - cd recetario_app
    
 3. Instala las dependencias
-   </> Bash
-   flutter pub get
+   - </> Bash
+   - flutter pub get
    
 5. Ejecuta la app en tu emulador o dispositivo.
-    </> Bash
-    flutter run
+    - </> Bash
+    - flutter run
 
 ## Estructura del proyecto
 - /lib-> Código principal de Flutter.

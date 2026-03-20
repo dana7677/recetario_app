@@ -52,8 +52,8 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 
 ## Screenshots
 
-![CapturaListado](assets/sceenShots/Listado_Recetas.png)
-![CapturaListado](assets/sceenShots/Listado_Recetas_2.png)
+### Listado de recetas
+![Pantalla principal](assets/images/Listado_Recetas.png)
 
 
 ## Gifs

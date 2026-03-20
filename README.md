@@ -34,17 +34,17 @@ valores nutricionales de los ingredientes.
     </> Bash
     flutter run
 
-#Estructura del proyecto
+## Estructura del proyecto
 - /lib-> Código principal de Flutter.
   - /database -> Base de datos SQFlite y helpers.
   - /appFolder-> Scripts principales
 - /assets-> Imágenes y recursos
 
-#Mejora Futura
+## Mejora Futura
 -Añadir buscador por ingrediente, favoritos o filtrar por valor nutricional.
 -Añadir sincronización con backend o almacenamiento en la nube.
 -UI más avanzada con más animaciones y búsqueda en tiempo real.
 
 
-#Licencia 
+## Licencia 
 Proyecto libre para uso educativo y portfolio personal.

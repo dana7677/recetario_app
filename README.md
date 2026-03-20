@@ -56,14 +56,14 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ![Pantalla principal](assets/screenShots/Listado_Recetas.png) ![Pantalla principal_2](assets/screenShots/Listado_Recetas_2.png)
 
 ### Detalles
-![Pantalla principal](assets/screenShots/Detalles.png)
-![Pantalla principal](assets/screenShots/Detalles_1.png) ![Pantalla principal](assets/screenShots/Detalles_2.png) 
+![Detalles](assets/screenShots/Detalles.png)
+![Detalles_2](assets/screenShots/Detalles_1.png) ![Detalles_2](assets/screenShots/Detalles_2.png) 
 
 ### Nueva Receta
-![Pantalla principal](assets/screenShots/NuevaRecetaEditando.png) ![Pantalla principal](assets/screenShots/NuevaRecetaEditando_2.png)
+![Nueva_Receta](assets/screenShots/NuevaRecetaEditando.png) ![Nueva_Receta_1](assets/screenShots/NuevaRecetaEditando_2.png)
 
 ### Compartir receta
-![Pantalla principal](assets/screenShots/Compartida.png)
+![Compartir_Receta](assets/screenShots/Compartida.png)
 
 
 ## Gifs

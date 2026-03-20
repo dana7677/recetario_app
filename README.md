@@ -56,9 +56,9 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ## Gifs
 
 ![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
-![ListaRecetas_1](assets/gifs/GifDetallesReceta.gif)
-![ListaRecetas_1](assets/gifs/GifNuevaRecta.gif)
-![ListaRecetas_1](assets/gifs/GifNuevaRecta2.gif)
+![DetallesRecetas](assets/gifs/GifDetallesReceta.gif)
+![NuevaReceta](assets/gifs/GifNuevaRecta.gif)
+![NuevaReceta_2](assets/gifs/GifNuevaRecta2.gif)
 
 
 

@@ -84,8 +84,9 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ## Gifs
 
 - Ventana Principal Lista de Recetas.
-  
-![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
+<p align="center">
+  <img src="assets/gifs/GifPantallaPrincipal_1.gif" width="250"/>
+</p>
 
 - Ventana secundaria Detalles de la receta seleccionada.
   

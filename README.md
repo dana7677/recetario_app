@@ -53,7 +53,7 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ## Screenshots
 
 ### Listado de recetas
-![Pantalla principal](assets/images/Listado_Recetas.png)
+![Pantalla principal](assets/screenShots/Listado_Recetas.png)
 
 
 ## Gifs

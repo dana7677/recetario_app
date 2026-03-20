@@ -11,9 +11,6 @@ valores nutricionales de los ingredientes.
 - Ordenadas por ID o título.
 - Datos persistentes usando SQLite.
 
-
-## Screenshots
-
 ## Tecnologías
 - Flutter
 - Dart
@@ -52,6 +49,12 @@ Proyecto libre para uso educativo y portfolio personal.
 ## Mas información
 
 https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=sharing
+
+## Screenshots
+
+![CapturaListado](assets/sceenShots/Listado_Recetas.png)
+![CapturaListado](assets/sceenShots/Listado_Recetas_2.png)
+
 
 ## Gifs
 

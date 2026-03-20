@@ -55,10 +55,15 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 
 ## Gifs
 
+- Ventana Principal Lista de Recetas.
 ![ListaRecetas_1](assets/gifs/GifPantallaPrincipal_1.gif)
+
+- Ventana secundaria Detalles de la receta seleccionada.
 ![DetallesRecetas](assets/gifs/GifDetallesReceta.gif)
-![NuevaReceta](assets/gifs/GifNuevaRecta.gif)
-![NuevaReceta_2](assets/gifs/GifNuevaRecta2.gif)
+
+- Ventana secundaria Nueva Receta con información nueva.
+![NuevaReceta](assets/gifs/GifNuevaReceta.gif)
+![NuevaReceta_2](assets/gifs/GifNuevaReceta2.gif)
 
 
 

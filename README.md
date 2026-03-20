@@ -41,9 +41,9 @@ valores nutricionales de los ingredientes.
 - /assets-> Imágenes y recursos
 
 ## Mejora Futura
--Añadir buscador por ingrediente, favoritos o filtrar por valor nutricional.
--Añadir sincronización con backend o almacenamiento en la nube.
--UI más avanzada con más animaciones y búsqueda en tiempo real.
+- Añadir buscador por ingrediente, favoritos o filtrar por valor nutricional.
+- Añadir sincronización con backend o almacenamiento en la nube.
+- UI más avanzada con más animaciones y búsqueda en tiempo real.
 
 
 ## Licencia 

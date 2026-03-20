@@ -124,8 +124,6 @@ class DatabaseHelper {
     final db = await database;
     return await db.delete('recetas');
   }
-
-
   //Nutricion
 
   Future<Map<String, dynamic>?> buscarIngrediente(String nombre) async {

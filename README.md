@@ -64,6 +64,7 @@ https://drive.google.com/file/d/10vRHadAag6-YHnRSbqQTmo-FEjeRtFCc/view?usp=shari
 ![Nueva_Receta](assets/screenShots/NuevaRecetaEditando.jpg) ![Nueva_Receta_1](assets/screenShots/NuevaRecetaEditando_2.jpg)
 
 ### Compartir receta
+
 ![Compartir_Receta](assets/screenShots/Compartida.jpg)
 
 
